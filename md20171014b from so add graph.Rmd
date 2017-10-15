@@ -1,0 +1,64 @@
+---
+title: "markdown 1a"
+output: html_document
+---
+
+#### Put in your css file or directly in rmarkdown
+
+<style>
+  .col2 {
+    columns: 2 600px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 800px; /* chrome, safari */
+    -moz-columns: 2 600px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
+
+#### This section will have three columns
+
+<div class="col3">
+**1** one  
+**2** two  
+**3** three  
+**4** four  
+**5** five  
+**6** six  
+**7** seven  
+**8** eight  
+**9** nine  
+</div>
+
+fig.width=3,fig.asp=.8,out.width='700px',
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,echo=F,warning=F,message=F)
+source('ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
+```
+
+#### This section will have two columns
+
+<div class="col2">
+```{r fig.width=5}
+x2 <- xx020
+x3 <- ggplot(x2[grepl('^ ',variable)],aes(date,value),color=variable)+
+  geom_line(aes(color=variable),size=.5)+
+  scale_y_log10()+ylab('£/m2 (logarithmic scale)')+ 
+  guides(color=guide_legend(title="percentile")) + 
+  xlab('') + theme(legend.position = "bottom")
+x3
+#ggplotly(x3)
+```
+
+* bb1 
+* bb2 
+* bb3  
+
+</div>
+
+* bb1 
+* bb2 
+* bb3  

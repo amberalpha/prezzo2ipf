@@ -1,10 +1,10 @@
 require(aappd)
 setreturn(F)
-ver <- 41
+ver <- 45
 app <- 'ppd'
-source('script/init.R')
+source('../pkg/script/init.R')
 aatopselect('aappd')
-source('../pkg/R/stepclean.R')
+source('../pkg/R/step.R')
 source('../pkg/R/lib.R')
 #getlast <- gett
 save(ver,file='ver.RData')

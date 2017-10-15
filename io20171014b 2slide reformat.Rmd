@@ -1,0 +1,38 @@
+---
+title: "ioslides"
+date: "14 October 2017"
+output:
+  ioslides_presentation:
+    widescreen: true
+    transition: faster
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,fig.width=3,fig.asp=.8,echo=F,warning=F,message=F)
+source('ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
+```
+
+## 010  Performance last 12m {.build}
+* not bad
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+    cl1(dezo2d,dex='r1y',width='450px',height='450px')
+```
+
+
+## 020  Valuation trends over 23 years {.build}
+
+* High price -> high performance
+
+```{r }
+x2 <- xx020
+x3 <- ggplot(x2[grepl('^ ',variable)],aes(date,value),color=variable)+
+  geom_line(aes(color=variable),size=.5)+
+  scale_y_log10()+ylab('£/m2 (logarithmic scale)')+ 
+  guides(color=guide_legend(title="percentile")) + 
+  xlab('') + theme(legend.position = "bottom")
+ggplotly(x3)
+```
+
+

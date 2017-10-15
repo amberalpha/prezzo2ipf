@@ -1,0 +1,39 @@
+rp20171014a rpres basic
+========================================================
+author: 
+date: 
+autosize: true
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,echo=F,warning=F,message=F)
+source('ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
+```
+
+A map
+======================================
+
+High price -> high performance
+```{r , echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+    cl1(dezo2d,dex='r1y',width='450px',height='450px')
+```
+
+
+Two-Column Slide
+====================================
+```{r }
+x2 <- xx020
+x3 <- ggplot(x2[grepl('^ ',variable)],aes(date,value),color=variable)+
+  geom_line(aes(color=variable),size=.5)+
+  scale_y_log10()+ylab('£/m2 (logarithmic scale)')+ 
+  guides(color=guide_legend(title="percentile")) + 
+  xlab('') + theme(legend.position = "bottom")
+x3
+#ggplotly(x3)
+```
+
+***
+* b1
+* b2
+* b3
+
+kable(mtcars[1:2,])

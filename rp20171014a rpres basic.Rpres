@@ -1,0 +1,106 @@
+rp20171014a rpres basic
+========================================================
+author: 
+date: 
+autosize: true
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,echo=F,warning=F,message=F)
+source('ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
+```
+
+010  Performance last 12m
+==============================
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+    cl1(dezo2d,dex='r1y',width='450px',height='450px')
+```
+
+020  Valuation trends over 23 years
+======================================
+
+High price -> high performance
+
+```{r }
+x2 <- xx020
+x3 <- ggplot(x2[grepl('^ ',variable)],aes(date,value),color=variable)+
+  geom_line(aes(color=variable),size=.5)+
+  scale_y_log10()+ylab('£/m2 (logarithmic scale)')+ 
+  guides(color=guide_legend(title="percentile")) + 
+  xlab('') + theme(legend.position = "bottom")
+ggplotly(x3)
+```
+
+
+030  Tipping point?
+=========================
+
+* All the outperformance had already occurred 1995-2001 - the rest is compounding  
+* There followed a period of price convergence, as lower-valued regions 'caught up'
+* We are now at almost exactly the same 'strain level' between percentiles 25 and 75
+
+As of 2001 yearend the quartile 1 postcode was `r xx030a[,x1a1]`, valued at `r xx030a[,x1a2]` £/m2 and the quartile 3 postcode was `r xx030a[,x1b1]`, valued at `r xx030a[,x1b2]` £/m2
+
+As of 2017Q3 the quartile 1 postcode was `r xx030a[,x2a1]`, valued at `r xx030a[,x2a2]` £/m2 and the quartile 3 postcode was `r xx030a[,x2a1]`, valued at `r xx030a[,x2a2]` £/m2
+
+```{r }
+x2 <- xx030b
+x3 <- ggplot(x2[grepl('^75/25',variable)],aes(date,value)) + 
+  geom_line(aes(color=variable),size=.7) + 
+  ylab('relative £/m2, quartile 4/quartile 1') + 
+  theme(legend.position="none")
+ggplotly(x3)
+```
+
+040  Last 4 quarters: a mixed picture on price convergence/divergence 
+=======================
+
+```{r }
+x3 <- xx040d
+x4 <- ggplot(x3,aes(ppm2t,r1y,text=zo))+geom_point(size=.5) + 
+  ylab('4 quarters return from 2016Q3') + 
+  xlab('£/m2 2016Q3') + theme(legend.position = "bottom")
+x4 %>% ggplotly(tooltip='text')
+```
+
+041  Last 4 quarters: London area price convergence
+===========================
+
+Affordability has driven buyers to the periphery.
+
+```{r }
+x3 <- xx041d
+x4 <- ggplot(x3[grepl('^E--|^W--|^N--|^SE-|^SW-|^RM-|^SO-|^UB-|^CR-|^HA-',zo)],aes(ppm2t,r1y,text=zo,color=area))+
+  geom_point(size=1) + 
+  ylab('4 quarters return from 2016Q3') + 
+  xlab('£/m2 at period start') + theme(legend.position = "bottom")
+x4 %>% ggplotly(tooltip='text')
+```
+</br>
+
+050  Risk attribution
+=======================
+
+* Only 6% of risk (variance of annual returns) is not captured by the first 3 national factors  
+
+* A local factor model captures most of the remaining residual risk
+
+```{r, fig.width=6, fig.asp=.8 }
+x1 <- xx050d
+x2 <- ggplot(x1,aes(x="",y=value,fill=variable)) + geom_col(width=1) 
+x3 <- x2 +coord_polar("y",dir=-1)+theme_void()+ guides(fill=guide_legend(title="")) + ggtitle("Systematic Risk in Resi Returns","Attribution of Variance in PCA Factor Model")
+x3
+# ggplotly(x3) #nothing at all online about this and not works
+```
+
+060 repeat sales numbers
+
+```{r }
+  x1 <- ggplot(xx060d,aes(variable,value/1e6,fill=variable)) +
+    geom_bar(stat='identity') +
+    xlab('') +
+    ylab('million') +
+    theme(legend.position="none") +
+  theme(axis.text.x=element_text(angle = 90, hjust = 0))
+  ggplotly(x1)
+```

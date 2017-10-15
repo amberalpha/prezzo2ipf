@@ -1,0 +1,35 @@
+---
+title: "ioslides"
+date: "14 October 2017"
+output:
+  ioslides_presentation:
+    widescreen: true
+    transition: faster
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,fig.width=3,fig.asp=.8,echo=F,warning=F,message=F)
+source('ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
+```
+
+## 010  Performance last 12m 
+
+<div class="columns-2">
+```{r fig.height=5, output.height='100%'}
+x2 <- xx020
+x3 <- ggplot(x2[grepl('^ ',variable)],aes(date,value),color=variable)+
+  geom_line(aes(color=variable),size=.5)+
+  scale_y_log10()+ylab('£/m2 (logarithmic scale)')+ 
+  guides(color=guide_legend(title="percentile")) + 
+  xlab('') + theme(legend.position = "bottom")
+x3
+#ggplotly(x3)
+```
+
+  - Bullet 1
+  - Bullet 2
+  - Bullet 3
+</div>
+
+
