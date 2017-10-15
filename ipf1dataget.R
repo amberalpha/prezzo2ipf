@@ -1,13 +1,11 @@
 knitr::opts_chunk$set(echo = F)
 require(aappd)
 setreturn(F)
-ver <- 41
+ver <- 45
 app <- 'ppd'
-source('../init.R')
+source('init.R')
 
 aatopselect('aappd')
-source('../step.R')
-source('../lib.R')
 #getlast <- gett
 save(ver,file='ver.RData')
 d0 <- '2007-12-31'
