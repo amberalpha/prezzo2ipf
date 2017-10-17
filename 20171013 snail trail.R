@@ -1,4 +1,5 @@
 require(aappd)
+getgd('scoxd')
 xy <- data.table(copy(scoxd))
 xy[,x:=cumsum(fmp2)][,y:=cumsum(fmp3)][,date:=ifelse(.I%%8&!(.I==1)&!(.I==nrow(xy)),NA,as.character(index(scoxd)))]
 ggplot(xy,aes(x,y,label=date))+geom_path(arrow=arrow(length=unit(0.2,'cm')))+geom_label(aes(fill=factor(date)))+
@@ -21,3 +22,6 @@ plot(M2)
 dd <- index(scoxd)
 paste0(format(dd, '%Y'),'Q',1:4)
 ?DateTimeClasses
+
+
+
