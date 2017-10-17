@@ -1,0 +1,10 @@
+---
+output: html_document
+---
+
+# Factors
+
+### * Factor 'drivers' have a pervasive influence nationwide
+### * Each locality has a slow-changing sensitivity to the drivers
+### * Return = driver strength x sensitivity
+### * In our model there are 3 totally independent factor drivers

@@ -14,7 +14,7 @@ wx <- 800
 axispoint <- 16
 getgd(c('dd0120','dd0120a','dd140a'))
 
-rbc140 <- c('1995-2001','2001-2005','2005-2014','2014-?')
+rbc0140 <- c('1995-2001','2001-2005','2005-2014','2014-?')
 
 ui <- fluidPage(
   tags$style(type = "text/css",
@@ -26,13 +26,13 @@ ui <- fluidPage(
     sidebarPanel(
       
 
-      radioButtons('rb','',choices=as.character(rbc140))
+      radioButtons('rb0140','',choices=as.character(rbc0140))
     ),
     
     mainPanel(
       tabsetPanel(id='tsp',selected='1',
                   tabPanel("1",
-                           plotlyOutput("img1")#,height=300,width=300) do nothing
+                           plotlyOutput("img0140")#,height=300,width=300) do nothing
                   )
       )
     )
@@ -56,9 +56,9 @@ server <- function(session,input, output) {
   #   updateSliderInput(session,'year',value=vv[3:4]) 
   # })
   
-  output$img1 <- renderPlotly({
+  output$img0140 <- renderPlotly({
     #browser()
-    i <- match(input$rb,rbc140)
+    i <- match(input$rb0140,rbc0140)
     tp1 <- c('2001-12-31','2005-12-31','2014-09-30','2017-12-31')
     tp2 <- as.Date(tp1)
     yrange <- dd140a[,range(cr,na.rm=T)]

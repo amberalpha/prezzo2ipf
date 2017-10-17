@@ -1,0 +1,11 @@
+---
+output: html_document
+---
+
+# Content
+
+### * Cycles in relative valuation
+### * Factors driving cycles
+### * Premia for new build, renovation
+### * Infrastructure cases
+### * Applications

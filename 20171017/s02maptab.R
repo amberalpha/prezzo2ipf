@@ -1,8 +1,3 @@
-#20171015 works just fine in both preview and chrome
-#suspendwhenhidden=F makes it load in background
-#both server and ui are verbose 
-#ui may be inevitable
-#server should be done in loop but not works today
 require(leaflet)
 source('../ipf1dataget.R') #problem with filepaths either here or inside the script 20171011
 library(shiny)
@@ -79,7 +74,7 @@ server <- function(session,input, output) {
   output$map6<- renderLeaflet({
     cl1(dezo2d,dex=names(dezo2d@data)[6],width='450px',height='900px')
   })
-  #outputOptions(output, "map2", suspendWhenHidden = FALSE)
+  outputOptions(output, "map2", suspendWhenHidden = FALSE)
   for(i in nm) {
     outputOptions(output, paste0('map',i), suspendWhenHidden = FALSE)
   }

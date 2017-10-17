@@ -13,7 +13,7 @@ aatopselect('aappd')
 wx <- 800
 axispoint <- 16
 getgd(c('dd0120','dd0120a'))
-rbc <- c('2016: Affordable suburbs outperform'='London 2016','2016: Nationally, mid-price outperforms'='National 2016','2002: Affordable suburbs outperform'='London 2002','2002: Nationally, mid-price outperforms'='National 2002','2012: Prime Central London outperforms'='London 2012','...')
+rbc0120 <- c('2016: Affordable suburbs outperform'='London 2016','2016: Nationally, mid-price outperforms'='National 2016','2002: Affordable suburbs outperform'='London 2002','2002: Nationally, mid-price outperforms'='National 2002','2012: Prime Central London outperforms'='London 2012','...')
 
 ui <- fluidPage(
   tags$style(type = "text/css",
@@ -31,7 +31,7 @@ ui <- fluidPage(
       sliderInput('year','year',min=1996,max=2017,value=c(2016,2017),sep='')
       )
       ,
-      radioButtons('rb','',choices=as.character(rbc))
+      radioButtons('rb','',choices=as.character(rbc0120))
     ),
     
     mainPanel(
@@ -41,7 +41,7 @@ ui <- fluidPage(
              </style>'),
       tabsetPanel(id='tsp',selected='1',
                   tabPanel("1",
-                           plotlyOutput("img1")#,height=300,width=300) do nothing
+                           plotlyOutput("img0120")#,height=300,width=300) do nothing
                   )
       )
       
@@ -57,8 +57,8 @@ ui <- fluidPage(
 
 server <- function(session,input, output) {
   
-  titleReact <- reactive({
-    x <- names(rbc)[match(input$rb,rbc)]
+  t0120R <- reactive({
+    x <- names(rbc0120)[match(input$rb,rbc0120)]
     print(x)
     x
   })
@@ -70,7 +70,7 @@ server <- function(session,input, output) {
     updateSliderInput(session,'year',value=vv[3:4]) 
   })
   
-  output$img1 <- renderPlotly({
+  output$img0120 <- renderPlotly({
     x1 <- dd0120a[dist<=max(input$radius)&dist>=min(input$radius),other]
     x2 <- setkey(dd0120,rcode)[x1][openforyear<=max(input$year)&openforyear>=min(input$year)]
     x3 <- ggplot(x2,aes(ppm2t,totalret,text=rcode))+geom_point(size=.4)+
@@ -79,7 +79,7 @@ server <- function(session,input, output) {
             axis.title.x = element_text(size=axispoint),
             axis.title.y = element_text(size=axispoint),
             plot.title = element_text(size=22))+
-    xlab('price £/m2')+ylab('calendar year return')+ggtitle(titleReact())#+ggtitle("Performance/Price scatter by postcode",subtitle=titleReact())
+    xlab('price £/m2')+ylab('calendar year return')+ggtitle(t0120R())#+ggtitle("Performance/Price scatter by postcode",subtitle=t0120R())
     ggplotly(x3,width=wx,height=wx)
     #x3
   })
